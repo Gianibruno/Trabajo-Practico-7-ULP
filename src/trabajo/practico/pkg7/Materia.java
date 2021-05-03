@@ -20,6 +20,11 @@ public class Materia {
         this.anio = anio;
     }
 
+    @Override
+    public String toString() {
+        return idMateria +" "+nombre;
+    }
+
     public int getIdMateria() {
         return idMateria;
     }

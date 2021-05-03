@@ -9,10 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import trabajo.practico.pkg7.Materia;
 
-/**
- *
- * @author giani
- */
+
 public class JFFormularioDeMaterias extends javax.swing.JInternalFrame {
 
     List<Materia> l;
@@ -146,10 +143,27 @@ public class JFFormularioDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BNuevoActionPerformed
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
-        if(TAño.getText()==""||TCodigoMateria.getText()==""||TNombreMateria.getText()==""){
+        if (TAño.getText() == "" || TCodigoMateria.getText() == "" || TNombreMateria.getText() == "") {
             JOptionPane.showMessageDialog(this, "Advertencia, se creo una materia con campos en blanco.");
         }
-        l.add(new Materia(Integer.parseInt(TCodigoMateria.getText()), TNombreMateria.getText(), Integer.parseInt(TAño.getText())));
+         try {
+            Integer.parseInt(TCodigoMateria.getText());
+        } catch (NumberFormatException excepcion) {
+        JOptionPane.showMessageDialog(this, "El Codigo ID ingresado no es numerico.");
+        }
+        try {
+            Integer.parseInt(TAño.getText());
+        } catch (NumberFormatException excepcion) {
+        JOptionPane.showMessageDialog(this, "El año ingresado no es numerico.");
+        }
+        
+        if (l.stream().anyMatch(m -> TCodigoMateria.getText().equals(m.getIdMateria()+""))) {
+            JOptionPane.showMessageDialog(this, "Ya hay una materia con ese codigo ID.");
+            
+        }
+        else{
+            l.add(new Materia(Integer.parseInt(TCodigoMateria.getText()), TNombreMateria.getText(), Integer.parseInt(TAño.getText())));
+        }
     }//GEN-LAST:event_BGuardarActionPerformed
 
 

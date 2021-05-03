@@ -6,6 +6,7 @@
 package JFrame;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import trabajo.practico.pkg7.Alumno;
 
 /**
@@ -15,8 +16,9 @@ import trabajo.practico.pkg7.Alumno;
 public class JFFormularioDeAlumnos extends javax.swing.JInternalFrame {
 
     List<Alumno> l;
+
     public JFFormularioDeAlumnos(List<Alumno> l) {
-        this.l=l;
+        this.l = l;
         initComponents();
     }
 
@@ -45,6 +47,8 @@ public class JFFormularioDeAlumnos extends javax.swing.JInternalFrame {
         jLabel2.setText("Apellido:");
 
         jLabel3.setText("Nombre:");
+
+        TLegajo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel4.setText("Formulario de Alumnos");
@@ -137,7 +141,17 @@ public class JFFormularioDeAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
-        l.add(new Alumno(Integer.parseInt(TLegajo.getText()),TApellido.getText(),TNombre.getText()));
+        try {
+            Integer.parseInt(TLegajo.getText());
+        } catch (NumberFormatException excepcion) {
+            JOptionPane.showMessageDialog(this, "El legajo ingresado no es numerico.");
+        }
+        if (l.stream().anyMatch(m -> TLegajo.getText().equals(m.getLegajo() + ""))) {
+            JOptionPane.showMessageDialog(this, "Ya hay un alumno con ese legajo.");
+
+        } else {
+            l.add(new Alumno(Integer.parseInt(TLegajo.getText()), TApellido.getText(), TNombre.getText()));
+        }
     }//GEN-LAST:event_BGuardarActionPerformed
 
     private void BNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BNuevoActionPerformed
