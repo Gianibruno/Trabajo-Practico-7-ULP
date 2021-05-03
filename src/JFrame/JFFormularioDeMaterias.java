@@ -143,7 +143,8 @@ public class JFFormularioDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BNuevoActionPerformed
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
-        if (TAño.getText().equals("") || TCodigoMateria.getText().equals("") || TNombreMateria.getText().equals("")) {
+        if (TAño.getText().isEmpty() || TCodigoMateria.getText().isEmpty() || TNombreMateria.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ha ingresado campos vacios");
             throw new RuntimeException("Campos invalidos");
         }
          try {
