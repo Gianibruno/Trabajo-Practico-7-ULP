@@ -21,9 +21,10 @@ public class JFFormularioDeInscripcion extends javax.swing.JInternalFrame {
         this.la=la;
         this.lm=lm;
         initComponents();
-        
+        la.forEach(alumno -> CBAlumno.addItem(alumno));
+        lm.forEach(materia -> CBMateria.addItem(materia));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,14 +49,11 @@ public class JFFormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Elija un Alumno:");
 
-        CBMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CBMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBMateriaActionPerformed(evt);
             }
         });
-
-        CBAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         BInscribir.setText("Inscribir");
         BInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -89,8 +87,8 @@ public class JFFormularioDeInscripcion extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CBMateria, 0, 146, Short.MAX_VALUE)
-                                    .addComponent(CBAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(CBMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CBAlumno, 0, 146, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
                                 .addComponent(BInscribir)))
@@ -121,9 +119,10 @@ public class JFFormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void BInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BInscribirActionPerformed
-        // TODO add your handling code here:
+        Alumno a=(Alumno) CBAlumno.getSelectedItem();
+        a.agregarMaterias((Materia) CBMateria.getSelectedItem());        
     }//GEN-LAST:event_BInscribirActionPerformed
 
     private void BSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSalirActionPerformed
@@ -138,8 +137,8 @@ public class JFFormularioDeInscripcion extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BInscribir;
     private javax.swing.JButton BSalir;
-    private javax.swing.JComboBox<String> CBAlumno;
-    private javax.swing.JComboBox<String> CBMateria;
+    private javax.swing.JComboBox<Alumno> CBAlumno;
+    private javax.swing.JComboBox<Materia> CBMateria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
